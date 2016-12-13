@@ -87,16 +87,7 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
-                       <div class="form-group">
-                           <label for="role" class="col-md-4 control-label">Rolle</label>
-                           <div class="col-md-6">
-                               <select class="form-control" name="role_id">
-                                   @foreach($roles as $role)
-                                     <option value="{{$role->id}}">{{$role->name}}</option>
-                                     @endforeach
-                                </select>
-                           </div>
-                       </div>
+
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
