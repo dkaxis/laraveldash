@@ -21,12 +21,18 @@ class UserController extends Controller
     public function index()
     {
         $users = User::with('role')->get();
-        return view('auth.showUsers',compact('users'));
+        if(Auth::user()->hasRole('Admin')){
+            return view('auth.showUsers',compact('users'));
+        }else{
+            return view('auth.index',compact('users'));
+        }
+     
          
     }
 
     public function edit(User $user){
-        return view('auth.update',array('user'=>$user));
+        $roles = Role::get();
+        return view('auth.update',array('user'=>$user,'roles'=>$roles));
     }
     public function update(Request $request, User $user){
            $this->validate($request,[

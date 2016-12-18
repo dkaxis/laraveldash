@@ -54,4 +54,13 @@ class User extends Authenticatable
     public function setLastNameAttribute($value) {
         $this->attributes['last_name'] = ucfirst($value);
     }
+
+    public function hasRole($roles)
+	{
+		 if($this->role->name == $roles) {
+            return true;
+        }
+        return false;
+	}
+	
 }

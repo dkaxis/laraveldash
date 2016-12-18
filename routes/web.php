@@ -21,7 +21,7 @@ Route::get('/', 'HomeController@index');
 Route::get('/users', 'Auth\UserController@index');
 Route::get('/users/edit/{user}', 'Auth\UserController@edit');
 Route::patch('/users/edit/{user}', 'Auth\UserController@update');
-Route::get('/users/delete/{user}', 'Auth\UserController@delete');
+Route::get('/users/delete/{user}', 'Auth\UserController@delete')->middleware('roles:Admin');
 
 Route::get('/profile', 'Auth\UserController@profile');
 Route::patch('profile/{user}', 'Auth\UserController@update_profile');

@@ -55,3 +55,4 @@ class Client extends Model
         $this->attributes['cpr'] = encrypt($value);
     }
 }
+// TODO: Tilføj primære og sekundære kp fra users
