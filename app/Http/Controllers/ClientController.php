@@ -34,15 +34,36 @@ class ClientController extends Controller
         'cpr' => 'required',
         'address' => 'required'
         ]);
-        $client = new Client($request->all());
+        $client = new Client();
+        $client->first_name = $request->input('first_name');
+        $client->last_name = $request->input('last_name');
+        $client->cpr = $request->input('cpr');
+        $client->phone = $request->input('phone');
+        $client->address = $request->input('address');
+        	if($request->hasFile('avatar')){
+    		$avatar = $request->file('avatar');
+    		$filename = time() . '.' . $avatar->getClientOriginalExtension();
+    		Image::make($avatar)->orientate()->resize(300, 300)->save( public_path('uploads/avatars/' . $filename ) );
+            $client->avatar = $filename;
+    	}
         $client->save();
+        $pdata = explode(',',$request->input('pkp'));
+        $sdata = explode(',',$request->input('skp'));
+        foreach($pdata as $d){
+          $pd[$d] = ['primary' => 1];   
+        }
+        foreach($sdata as $d){
+          $pd[$d] = ['primary' => 0];   
+        }
+        
+        $client->users()->sync($pd);
         \Session::flash('alert_class','info');
        \Session::flash('alert_message','Klienten er gemt!');
-        redirect('/clients');
+        return redirect('/clients');
     }
 
     public function edit(Client $client)
-    {
+    {   
         return view('client.edit',array('client'=>$client));
     }
 
@@ -69,6 +90,16 @@ class ClientController extends Controller
         $client->phone = $request->input('phone');
         $client->address = $request->input('address');
         $client->update();
+        $pdata = explode(',',$request->input('pkp'));
+        $sdata = explode(',',$request->input('skp'));
+        foreach($pdata as $d){
+          $pd[$d] = ['primary' => 1];   
+        }
+        foreach($sdata as $d){
+          $pd[$d] = ['primary' => 0];   
+        }
+        
+        $client->users()->sync($pd);
         return back();   
     }
 }

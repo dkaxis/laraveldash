@@ -7,7 +7,7 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-
+@import "node_modules/selectize/dist/css/selectize.bootstrap3";
 .side-nav{
     position: fixed;
     top: 51px;
@@ -55,4 +55,28 @@ background-color: #eeeeee;
   z-index: 2000;
   width: 100%;
   position: absolute;
+}
+
+.vcard{
+  width:20%;
+  padding:10px;
+  margin:10px;
+}
+
+.vcard .media-body{
+  vertical-align: middle;
+}
+
+.label-admin{
+  background:blue;
+}
+
+.label-user{
+  background:green;
+  
+}
+
+.label-superuser{
+  background:purple;
+  
 }

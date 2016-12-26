@@ -9,7 +9,11 @@
             <h2>Dashboard</h2>
             <div class="panel panel-default">
                 <div class="panel-body">
-                    You are logged in!
+                    Dine klienter:
+                    @foreach(Auth::user()->clients as $client)
+
+                    {{ $client->first_name}}
+                    @endforeach
                 </div>
             </div>
         </div>

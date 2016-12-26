@@ -90,11 +90,7 @@
                        <div class="form-group">
                            <label for="role" class="col-md-4 control-label">Rolle</label>
                            <div class="col-md-6">
-                               <select class="form-control" name="role_id">
-                                   @foreach($roles as $role)
-                                     <option value="{{$role->id}}">{{$role->name}}</option>
-                                     @endforeach
-                                </select>
+                               <input id="roles" type="text" class="form-control" name="roles" value="" required>
                            </div>
                        </div>
                         <div class="form-group">
@@ -111,3 +107,53 @@
     </div>
 </div>
 @endsection
+@section('pagescript')
+    <script>
+    $(function() {
+
+
+   
+   var $select = $('#roles').selectize({
+    plugins: ['remove_button'],    
+    valueField: 'id',
+    labelField: 'name',
+    searchField: 'name',
+     persist: false,
+   
+    create: false,
+    render: {
+        item: function(item, escape) {
+						
+							return '<div class="label-'+item.name.toLowerCase()+'">' +
+                                '<span class="name">' + item.name + '</span>'  +
+							'</div>';
+						},
+        option: function(item, escape) {
+   
+            return '<div>' +
+                '<span class="title">' +
+                    '<span class="name"><i class="glyphicon glyphicon-user"></i>' + item.name + '</span>' +
+                '</span>' +
+            '</div>';
+        }
+    },
+    load: function(query, callback) {
+        if (!query.length) return callback();
+        $.ajax({
+            url: '{{ url('/roles')}}',
+            type: 'GET',
+            error: function() {
+                callback();
+            },
+            success: function(res) {
+                  console.log(res);
+                callback(res);
+              
+            }
+        });
+    }
+});
+
+});
+    </script>
+@stop

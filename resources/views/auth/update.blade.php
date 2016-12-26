@@ -75,11 +75,8 @@
    <div class="form-group">
                            <label for="role" class="col-md-4 control-label">Rolle</label>
                            <div class="col-md-6">
-                               <select class="form-control" name="role_id">
-                                   @foreach($roles as $role)
-                                     <option value="{{$role->id}}" @if($user->role_id == $role->id) selected @endif>{{$role->name}}</option>
-                                     @endforeach
-                                </select>
+                              <input id="roles" type="text" class="form-control" name="roles" value="" required>
+
                            </div>
                        </div>
                        @endif
@@ -105,3 +102,70 @@
     </div>
 </div>
 @endsection
+@section('pagescript')
+    <script>
+    $(function() {
+
+
+   var tags = [
+    @foreach ($user->roles as $tag)
+       
+    {
+        id: "{{$tag->id}}",
+        name: "{{$tag->name}}",
+        description:  "{{$tag->description}}"
+    },
+  
+    @endforeach
+];
+   var $select = $('#roles').selectize({
+    plugins: ['remove_button'],    
+    valueField: 'id',
+    labelField: 'name',
+    searchField: 'name',
+     persist: false,
+    options: tags,
+    create: false,
+    render: {
+        item: function(item, escape) {
+							return '<div>' +
+							'<span class="name">' + item.name + '</span>'  +
+							'</div>';
+						},
+        option: function(item, escape) {
+           return '<div>' +
+                '<span class="title">' +
+                    '<span class="name"><i class="glyphicon glyphicon-user"></i>' + item.name + '</span>' +
+                '</span>' +
+                '<ul>' +
+                    '<li>'+item.description+'</li>'+
+                 '</ul>'+   
+            '</div>';
+        }
+    },
+    load: function(query, callback) {
+        if (!query.length) return callback();
+        $.ajax({
+            url: '{{ url('/roles')}}',
+            type: 'GET',
+            error: function() {
+                callback();
+            },
+            success: function(res) {
+                  console.log(res);
+                callback(res);
+              
+            }
+        });
+    }
+});
+
+var control = $select[0].selectize;
+@foreach ($user->roles as $tag)
+ 
+   control.addItem({{$tag->id}});
+    @endforeach
+
+ });
+    </script>
+@stop

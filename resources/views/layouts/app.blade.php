@@ -29,16 +29,20 @@
         @endif
         @include('layouts.flash')
         @yield('content')
+      
     </div>
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+      @yield('pagescript')
     <script>
 $(function() {
 
   if('.alert'){
   setTimeout(function() { $('.alert').alert('close') ; }, 2000);
-  } });
+  }
+
+});
     </script>
 </body>
 </html>

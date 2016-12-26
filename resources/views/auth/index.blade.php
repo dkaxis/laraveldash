@@ -7,7 +7,7 @@
         <div class="col-md-11 col-sm-10 col-md-offset-1 col-sm-offset-2">
         <h2> @lang('settings.users')     @if(Auth::user()->hasRole('Admin'))<a href="{{url('/register')}}" class="btn btn-sm btn-default pull-right"><i class="glyphicon glyphicon-plus"></i></a>@endif</h2>
      @foreach($users as $user)
-        <div class="panel panel-default col-md-5">
+        <div class="panel panel-default col-md-2 vcard">
                
             <div class="media">
   <div class="media-left">

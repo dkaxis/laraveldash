@@ -16,7 +16,11 @@
                     <td><i class="glyphicon glyphicon-user"> </i> {{$user->first_name}} {{$user->last_name}} </td>
                     <td><i class="glyphicon glyphicon-envelope"> </i> {{$user->email}}</td>
                     <td><i class="glyphicon glyphicon-phone"></i> {{$user->phone}}</td>
-                    <td>{{$user->role->name}}</td>
+                    <td>
+                    @foreach($user->roles as $role)
+                    <span class="label label-success label-{{strtolower($role->name)}}">{{$role->name}}</span>    
+                    @endforeach    
+                    </td>
                     <td align="right">
                         <a href="users/edit/{{$user->id}}" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-pencil"> </i></a>
                             @if(Auth::user()->hasRole('Admin'))

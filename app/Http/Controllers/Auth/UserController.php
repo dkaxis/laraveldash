@@ -20,7 +20,7 @@ class UserController extends Controller
  
     public function index()
     {
-        $users = User::with('role')->get();
+        $users = User::all();
         if(Auth::user()->hasRole('Admin')){
             return view('auth.showUsers',compact('users'));
         }else{
@@ -31,8 +31,7 @@ class UserController extends Controller
     }
 
     public function edit(User $user){
-        $roles = Role::get();
-        return view('auth.update',array('user'=>$user,'roles'=>$roles));
+        return view('auth.update',array('user'=>$user));
     }
     public function update(Request $request, User $user){
            $this->validate($request,[
@@ -41,7 +40,20 @@ class UserController extends Controller
         'phone' => 'required|max:8|unique:users,phone,'.$user->id,            
         'email' => 'required|email|max:255|unique:users,email,'.$user->id,
         ]);
-        $user->update($request->all());
+
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->email = $request->input('email');
+        $user->phone = $request->input('phone');
+
+        $user->update();
+
+        $data = explode(',',$request->input('roles'));
+      
+        $user->roles()->sync($data);
+
+
+
         \Session::flash('alert_class','info');
        \Session::flash('alert_message','Ændringer er gemt!');
 

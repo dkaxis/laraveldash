@@ -22,6 +22,17 @@ Route::get('/users', 'Auth\UserController@index');
 Route::get('/users/edit/{user}', 'Auth\UserController@edit');
 Route::patch('/users/edit/{user}', 'Auth\UserController@update');
 Route::get('/users/delete/{user}', 'Auth\UserController@delete')->middleware('roles:Admin');
+Route::get('/listusers', function (){
+   return App\User::all();
+    })->middleware('roles:Admin');
+Route::get('/roles', function (){
+   return App\Role::all();
+    });
+    
+Route::get('/getuser/{user}', function ($user){
+   return App\User::find($user);
+    })->middleware('roles:Admin');
+
 
 Route::get('/profile', 'Auth\UserController@profile');
 Route::patch('profile/{user}', 'Auth\UserController@update_profile');

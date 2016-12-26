@@ -12,11 +12,11 @@ class Client extends Model
     use SoftDeletes;
 
      protected $fillable = [
-        'first_name', 'last_name','phone','cpr','address', 'avatar',
+        'first_name', 'last_name','phone','cpr','address', 'avatar','pkp'
     ];
 
       public function users(){
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany('App\User')->withPivot('primary');
     }
      public function getFullNameAttribute()
     {

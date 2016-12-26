@@ -23,7 +23,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name','phone','avatar','email', 'password','role_id'
+        'first_name', 'last_name','phone','avatar','email', 'password'
     ];
 
     /**
@@ -35,8 +35,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-      public function role(){
-        return $this->belongsTo('App\Role');
+      public function roles(){
+        return $this->belongsToMany('App\Role');
     }
      public function clients(){
         return $this->belongsToMany('App\Client');
@@ -54,12 +54,18 @@ class User extends Authenticatable
     public function setLastNameAttribute($value) {
         $this->attributes['last_name'] = ucfirst($value);
     }
-
+  public function getFullNameAttribute()
+    {
+        return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
+    }
     public function hasRole($roles)
-	{
-		 if($this->role->name == $roles) {
+	{       
+         foreach($this->roles as $role){
+              if($role->name == $roles) {
             return true;
         }
+         }           
+		
         return false;
 	}
 	
