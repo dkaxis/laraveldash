@@ -18,6 +18,7 @@ elixir(function(mix) {
   mix.sass('app.scss')
     .copy(bootstrapPath + '/fonts', 'public/fonts')
     .copy(bootstrapPath + '/javascripts/bootstrap.min.js', 'public/js')
+    .copy('node_modules/bootstrap-datetime-picker/js','public/js')
     .webpack('app.js');
 
 });

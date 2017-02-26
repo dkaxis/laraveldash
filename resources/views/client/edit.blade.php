@@ -3,8 +3,8 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-      @include('layouts.sidebar')
-        <div class="col-md-11 col-md-offset-1">
+  
+        <div class="col-md-12">
                     <form class="form-horizontal" enctype="multipart/form-data" role="form" method="POST" action="">
             
             <h2>Rediger {{$client->full_name}}</h2>

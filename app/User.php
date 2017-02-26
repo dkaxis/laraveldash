@@ -41,6 +41,10 @@ class User extends Authenticatable
      public function clients(){
         return $this->belongsToMany('App\Client');
     }
+
+     public function posts(){
+        return $this->hasMany('App\Post');
+    }
         /**
      * Always capitalize the first name when we save it to the database
      */

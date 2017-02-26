@@ -3,12 +3,10 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-      @include('layouts.sidebar')
-        <div class="col-md-11 col-md-offset-1">
+    <div class="col-md-11 col-md-offset-1">
             <h2>Registrer Ny @lang('settings.user')</h2>
             <div class="panel panel-default">
-             
-                <div class="panel-body">
+             <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                         {{ csrf_field() }}
 
@@ -140,7 +138,7 @@
     load: function(query, callback) {
         if (!query.length) return callback();
         $.ajax({
-            url: '{{ url('/roles')}}',
+            url: '{{ url('/tags')}}',
             type: 'GET',
             error: function() {
                 callback();

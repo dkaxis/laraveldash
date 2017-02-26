@@ -21,7 +21,9 @@ class ClientController extends Controller
         $clients = client::all();
         return view('client.index',compact('clients'));
     }
-
+    public function show(Client $client){
+      return view('client.dashboard',array('client'=>$client));  
+    }
     public function create(){
       return view('client.new');  
     }

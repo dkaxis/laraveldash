@@ -18,4 +18,8 @@ return[
     'user' => 'Medarbejder',
     'dashboard' => 'Dashboard',
     'settings' => 'Opsætning',
+    'plans' => 'Handleplan',
+    'calendar' => 'Kalendar',
+    'logbook' => 'Logbog',
+    'contacts' => 'Kontakter'
 ];

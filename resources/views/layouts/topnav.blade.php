@@ -19,20 +19,36 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        <li ><a href="{{ url('/') }}" class="{{ Request::is('/') ? 'active' : '' }}"><center>
+                    <i class="glyphicon glyphicon-dashboard"> </i> 
+                    @lang('settings.dashboard')</center>
+                    </a></li>
+                <li ><a href="{{ url('/clients/') }}" class="{{ Request::is('clients','clients/*') ? 'active' : '' }}"><center>
+                    <i class="glyphicon glyphicon-user"> </i> 
+                    @lang('settings.clients')</center>
+                    </a></li>
+                    <li ><a href="{{ url('/users/') }}" class="{{ Request::is('users','users/*') ? 'active' : '' }}"><center>
+                    <i class="glyphicon glyphicon-user"> </i> 
+                    @lang('settings.users')</center>
+                    </a></li>
+                    @if(Auth::user()->hasRole('Admin'))
+                      <li ><a href="{{ url('/settings') }}" class="{{ Request::is('settings','settings/*') ? 'active' : '' }}"><center>
+                    <i class="glyphicon glyphicon-user"> </i> 
+                    @lang('settings.settings')</center>
+                    </a></li>
+                    @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    <img src="/uploads/avatars/{{ Auth::user()->avatar }}" style="width:32px; height:32px;  border-radius:50%"><span class="caret"></span>
-                                </a>
+                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                 {{ Auth::user()->first_name }}  {{ Auth::user()->last_name }}<span class="caret"></span>
+                                    </a>
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="{{ url('/profile') }}">
-                                    {{ Auth::user()->first_name }}  {{ Auth::user()->last_name }}<br>
-                                    Profil
+                                    Min profil
                                     </a></li>
                                     <li>
                                         <a href="{{ url('/logout') }}"

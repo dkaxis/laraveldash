@@ -3,8 +3,8 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-      @include('layouts.sidebar')
-        <div class="col-md-11 col-md-offset-1">
+   
+        <div class="col-md-12">
             <h2>Ny @lang('settings.client')</h2>
             <div class="panel panel-default">
              

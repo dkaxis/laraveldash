@@ -3,8 +3,8 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        @include('layouts.sidebar')
-        <div class="col-md-11 col-sm-10 col-md-offset-1 col-sm-offset-2">
+
+        <div class="col-md-12">
         <h2>Klienter <a href="{{url('/clients/new')}}" class="btn btn-sm btn-default pull-right"><i class="glyphicon glyphicon-plus"></i></a></h2>
          <div class="panel panel-default">
             <table class="table table-bordered">
@@ -12,7 +12,7 @@
                 @if(count($clients))
                 @foreach($clients as $client)
                 <tr>
-                    <td><i class="glyphicon glyphicon-user"> </i> {{$client->full_name}}</td>
+                    <td><i class="glyphicon glyphicon-user"> </i><a href="{{ url('/clients/show/'.$client->id)}}"> {{$client->full_name}}</a></td>
                     <td><i class="glyphicon glyphicon-envelope"> </i> {{$client->cpr}}</td>
                     <td><i class="glyphicon glyphicon-phone"></i> {{$client->phone}}</td>
                      <td>

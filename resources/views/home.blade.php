@@ -3,19 +3,22 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-                @include('layouts.sidebar')
-
-        <div class="col-md-11 col-sm-10 col-md-offset-1 col-sm-offset-2">
+         
+        <div class="col-md-12 col-sm-12">
             <h2>Dashboard</h2>
-            <div class="panel panel-default">
-                <div class="panel-body">
+           
                     Dine klienter:
                     @foreach(Auth::user()->clients as $client)
-
-                    {{ $client->first_name}}
+                    <div class="panel panel-info">
+  <!-- Default panel contents -->
+  <div class="panel-heading "><a href="{{ url('/clients/show/'.$client->id)}}">{{ $client->first_name}} {{ $client->last_name}}</a></div>
+  <div class="panel-body">
+    <p>Aftaler</p>
+  </div>
+  </div>
+                    
                     @endforeach
-                </div>
-            </div>
+             
         </div>
     </div>
 </div>

@@ -42,6 +42,8 @@ $(function() {
   setTimeout(function() { $('.alert').alert('close') ; }, 2000);
   }
 
+  $('[data-toggle="popover"]').popover()
+
 });
     </script>
 </body>

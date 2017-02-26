@@ -13,7 +13,7 @@
                     @lang('settings.users')</center>
                     </a></li>
                     @if(Auth::user()->hasRole('Admin'))
-                      <li ><a href="{{ url('/settings') }}" class="{{ Request::is('settings') ? 'active' : '' }}"><center>
+                      <li ><a href="{{ url('/settings') }}" class="{{ Request::is('settings','settings/*') ? 'active' : '' }}"><center>
                     <i class="glyphicon glyphicon-user"> </i><br>
                     @lang('settings.settings')</center>
                     </a></li>
